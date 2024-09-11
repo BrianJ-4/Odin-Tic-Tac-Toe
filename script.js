@@ -96,9 +96,7 @@ function GameController()
     };
 }
 
-function UiController()
+const UiController = (function ()
 {
     const game = GameController();
-}
-
-UiController();
+})();
