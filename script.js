@@ -18,9 +18,22 @@ function Board()
         cell.pickCell(player);
     }
 
+    const printBoard = () => {
+        let boardString = "";
+        board.forEach(row => {
+            let rowString = ""
+            row.forEach(column => {
+                rowString += String(column.getCellValue());
+            });
+            boardString += rowString + "\n";
+        });
+        console.log(boardString);
+    }
+
     return {
         getBoard,
-        selectCell
+        selectCell,
+        printBoard
     };
 }
 
@@ -29,7 +42,7 @@ function Cell()
     let value = 0;
 
     const pickCell = (player) => {
-        value = player;
+        value = player.getPlayerNumber();
     };
 
     const getCellValue = () => {
@@ -42,4 +55,50 @@ function Cell()
     };
 }
 
+function Player(number)
+{
+    const playerNumber = number;
+
+    const getPlayerNumber = () => {
+        return playerNumber;
+    }
+
+    return getPlayerNumber;
+}
+
 function GameController()
+{
+    const board = Board();
+
+    const playerOne = Player(1);
+    const playerTwo = Player(2);
+
+    let activePlayer = playerOne;
+
+    const getActivePlayer = () => {
+        return activePlayer;
+    }
+
+    const switchActivePlayer = () => {
+        activePlayer = activePlayer == playerOne ? playerTwo : playerOne;
+    }
+
+    const playTurn = (cell) => {
+        board.selectCell(cell, getActivePlayer())
+    }
+
+    board.printBoard();
+
+    return {
+        getActivePlayer,
+        switchActivePlayer,
+        playTurn
+    };
+}
+
+function UiController()
+{
+    const game = GameController();
+}
+
+UiController();
