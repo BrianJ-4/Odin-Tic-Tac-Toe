@@ -63,7 +63,7 @@ function Player(number)
         return playerNumber;
     }
 
-    return getPlayerNumber;
+    return {getPlayerNumber};
 }
 
 function GameController()
@@ -92,11 +92,43 @@ function GameController()
     return {
         getActivePlayer,
         switchActivePlayer,
-        playTurn
+        playTurn,
+        getBoard: board.getBoard,
+        printBoard: board.printBoard
     };
 }
 
 const UiController = (function ()
 {
     const game = GameController();
+
+    const gameGrid = document.querySelector("#game-grid");
+    const playerOneDisplay = document.getElementById("player-one-display");
+    const playerTwoDisplay = document.getElementById("player-two-display");
+
+    const updateGameBoard = () => {
+        gameGrid.replaceChildren();
+
+        const activePlayer = game.getActivePlayer();
+        const gameBoard = game.getBoard();
+
+        gameBoard.forEach(row => {
+            row.forEach(cell => {
+                const gameCell = document.createElement("div");
+                gameCell.setAttribute("owner", cell.getCellValue());
+                gameCell.addEventListener('click', () => {
+                    if(cell.getCellValue() == 0)
+                    {
+                        game.playTurn(cell);
+                        game.switchActivePlayer();
+                        updateGameBoard();
+                        game.printBoard();
+                    }
+                });
+                gameCell.innerText = "asd"
+                gameGrid.appendChild(gameCell);    
+            });
+        });
+    }
+    updateGameBoard();
 })();
