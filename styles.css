@@ -4,6 +4,7 @@ html, body {
 }
 
 #main-container {
+    background-color: #131316;
     display: grid;
     grid-template-rows: 1fr 9fr;
     font-family: Roboto, sans-serif;
@@ -30,8 +31,18 @@ html, body {
 }
 
 .cell {
-    background-color: lightcyan;
+    background-color: #131316;
+    border: 2px solid #c2ffe7;
+    color: #c2ffe7;
     width: 150px;
     height: 150px;
-    border-radius: 20px;   
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+i[icon="playerOne"], i[icon="playerTwo"] {
+    font-size: 100px;
+    color: #c2ffe7;
 }
