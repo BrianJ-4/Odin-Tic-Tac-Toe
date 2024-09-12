@@ -162,23 +162,47 @@ const UiController = (function ()
         gameBoard.forEach(row => {
             row.forEach(cell => {
                 const gameCell = document.createElement("div");
+                const cellValue = cell.getCellValue();
                 gameCell.className = "cell";
-                gameCell.setAttribute("owner", cell.getCellValue());
+                                
                 gameCell.addEventListener('click', () => {
-                    if(cell.getCellValue() == 0)
-                    {
-                        game.playTurn(cell);
-                        game.switchActivePlayer();
-                        updateGameBoard();
-                        game.printBoard();
-                        const result = game.checkForWin();
-                        if(result != 0)
-                            game.handleWin(result);
-                    }
+                    if(cellValue == 0)
+                        processMove(cell);
                 });
+
+                if (cellValue != 0)
+                    gameCell.appendChild(getIcon(cellValue));
                 gameGrid.appendChild(gameCell);    
             });
         });
     }
+
+    const processMove = (cell) => {
+        game.playTurn(cell);
+        game.switchActivePlayer();
+        
+        game.printBoard();
+        updateGameBoard();
+        
+        const result = game.checkForWin();    
+        if(result != 0)
+            game.handleWin(result);
+    }
+
+    const getIcon = (cellValue) => {
+        const icon = document.createElement("i");
+        if(cellValue == 1)
+        {
+            icon.className = "fa-solid fa-xmark";
+            icon.setAttribute("icon", "playerOne")                    
+        }
+        else if(cellValue == 2)
+        {
+            icon.className = "fa-regular fa-circle";
+            icon.setAttribute("icon", "playerTwo")                    
+        }
+        return icon;
+    }
+
     updateGameBoard();
 })();
