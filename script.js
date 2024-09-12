@@ -87,6 +87,51 @@ function GameController()
         board.selectCell(cell, getActivePlayer())
     }
 
+    const checkForWin = () => {
+        const gameBoard = board.getBoard();
+
+        const checkRow = (row) => {
+            return gameBoard[row][0].getCellValue() != 0 &&
+                   gameBoard[row][0].getCellValue() == gameBoard[row][1].getCellValue() &&
+                   gameBoard[row][0].getCellValue() == gameBoard[row][2].getCellValue();
+        };
+        
+        const checkColumn = (col) => {
+            return gameBoard[0][col].getCellValue() != 0 &&
+                   gameBoard[0][col].getCellValue() == gameBoard[1][col].getCellValue() &&
+                   gameBoard[0][col].getCellValue() == gameBoard[2][col].getCellValue();
+        };
+        
+        const checkLeftToRightDiagonal = () => {
+            return gameBoard[0][0].getCellValue() != 0 &&
+                   gameBoard[0][0].getCellValue() == gameBoard[1][1].getCellValue() &&
+                   gameBoard[0][0].getCellValue() == gameBoard[2][2].getCellValue();
+        };
+        
+        const checkRightToLeftDiagonal = () => {
+            return gameBoard[0][2].getCellValue() != 0 &&
+                   gameBoard[0][2].getCellValue() == gameBoard[1][1].getCellValue() &&
+                   gameBoard[0][2].getCellValue() == gameBoard[2][0].getCellValue();
+        };
+        
+        for (let i = 0; i < 3; i++)
+        {
+            if (checkRow(i)) return gameBoard[i][0].getCellValue();
+            if (checkColumn(i)) return gameBoard[0][i].getCellValue();
+        }
+        
+        if (checkLeftToRightDiagonal())
+            return gameBoard[0][0].getCellValue();
+        if (checkRightToLeftDiagonal())
+            return gameBoard[0][2].getCellValue();
+        
+        return 0;        
+    }
+
+    const handleWin = (winner) => {
+        console.log(winner);
+    }
+
     board.printBoard();
 
     return {
@@ -94,7 +139,9 @@ function GameController()
         switchActivePlayer,
         playTurn,
         getBoard: board.getBoard,
-        printBoard: board.printBoard
+        printBoard: board.printBoard,
+        checkForWin,
+        handleWin
     };
 }
 
@@ -123,6 +170,9 @@ const UiController = (function ()
                         game.switchActivePlayer();
                         updateGameBoard();
                         game.printBoard();
+                        const result = game.checkForWin();
+                        if(result != 0)
+                            game.handleWin(result);
                     }
                 });
                 gameCell.innerText = "asd"
