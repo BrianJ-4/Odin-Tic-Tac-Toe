@@ -12,10 +12,26 @@ html, body {
 
 #player-display-container {
     display: flex;
+    gap: 20px;
+    justify-content: space-around;
 }
 
 #game-grid {
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+
+.cell {
+    background-color: lightcyan;
+    width: 150px;
+    height: 150px;
+    border-radius: 20px;   
 }
