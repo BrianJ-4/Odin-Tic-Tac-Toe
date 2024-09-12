@@ -162,6 +162,7 @@ const UiController = (function ()
         gameBoard.forEach(row => {
             row.forEach(cell => {
                 const gameCell = document.createElement("div");
+                gameCell.className = "cell";
                 gameCell.setAttribute("owner", cell.getCellValue());
                 gameCell.addEventListener('click', () => {
                     if(cell.getCellValue() == 0)
@@ -175,7 +176,6 @@ const UiController = (function ()
                             game.handleWin(result);
                     }
                 });
-                gameCell.innerText = "asd"
                 gameGrid.appendChild(gameCell);    
             });
         });
