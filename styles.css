@@ -1,0 +1,21 @@
+html, body {
+    height: 100%;
+    margin: 0px;
+}
+
+#main-container {
+    display: grid;
+    grid-template-rows: 1fr 9fr;
+    font-family: Roboto, sans-serif;
+    height: 100%;
+}
+
+#player-display-container {
+    display: flex;
+}
+
+#game-grid {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+}
