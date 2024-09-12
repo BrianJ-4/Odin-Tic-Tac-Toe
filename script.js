@@ -155,8 +155,6 @@ const UiController = (function ()
 
     const updateGameBoard = () => {
         gameGrid.replaceChildren();
-
-        const activePlayer = game.getActivePlayer();
         const gameBoard = game.getBoard();
 
         gameBoard.forEach(row => {
@@ -164,11 +162,13 @@ const UiController = (function ()
                 const gameCell = document.createElement("div");
                 const cellValue = cell.getCellValue();
                 gameCell.className = "cell";
-                                
-                gameCell.addEventListener('click', () => {
-                    if(cellValue == 0)
+                
+                if(cellValue == 0)
+                {
+                    gameCell.addEventListener('click', () => {
                         processMove(cell);
-                });
+                    });
+                }                
 
                 if (cellValue != 0)
                     gameCell.appendChild(getIcon(cellValue));
