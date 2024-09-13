@@ -129,10 +129,22 @@ function GameController()
     }
 
     const handleWin = (winner) => {
-        console.log(winner);
+        console.log(`Player ${winner} wins!`);
+        
     }
+    
+    const resetGame = () => {
+        const gameBoard = board.getBoard();
 
-    board.printBoard();
+        for (let i = 0; i < 3; i++) 
+        {
+            for (let j = 0; j < 3; j++) 
+            {
+                gameBoard[i][j] = Cell();
+            }
+        }
+        activePlayer = playerOne;
+    }
 
     return {
         getActivePlayer,
@@ -141,7 +153,8 @@ function GameController()
         getBoard: board.getBoard,
         printBoard: board.printBoard,
         checkForWin,
-        handleWin
+        handleWin,
+        resetGame
     };
 }
 
@@ -152,6 +165,14 @@ const UiController = (function ()
     const gameGrid = document.querySelector("#game-grid");
     const playerOneDisplay = document.getElementById("player-one-display");
     const playerTwoDisplay = document.getElementById("player-two-display");
+    const summary = document.getElementById("game-summary");
+    
+    const resetButton = document.getElementById("play-again-button");
+    resetButton.addEventListener("click", (event) => {
+        game.resetGame();
+        summary.close();
+        updateGameBoard();
+    })
 
     const updateGameBoard = () => {
         gameGrid.replaceChildren();
@@ -186,7 +207,9 @@ const UiController = (function ()
         
         const result = game.checkForWin();    
         if(result != 0)
-            game.handleWin(result);
+        {   
+            summary.showModal();
+        }
     }
 
     const getIcon = (cellValue) => {
