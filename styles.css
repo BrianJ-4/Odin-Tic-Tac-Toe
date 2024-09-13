@@ -11,10 +11,21 @@ html, body {
     height: 100%;
 }
 
+#content {
+    background-color: #131316;
+    display: grid;
+    grid-template-rows: 1fr 5fr;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
 #player-display-container {
+    padding-top: 10px;
     display: flex;
     gap: 20px;
     justify-content: space-around;
+    align-items: center;
 }
 
 #game-grid {
@@ -23,11 +34,7 @@ html, body {
     grid-template-columns: repeat(3, 1fr);
 
     gap: 20px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%)
+
 }
 
 .cell {
@@ -42,7 +49,12 @@ html, body {
     align-items: center;
 }
 
-i[icon="playerOne"], i[icon="playerTwo"] {
+i[icon="playerOne"] {
+    font-size: 120px;
+    color: #c2ffe7;
+}
+
+i[icon="playerTwo"] {
     font-size: 100px;
     color: #c2ffe7;
 }
