@@ -85,6 +85,7 @@ i[type="hover"] {
     background-color: #131316;
     border: 2px solid #c2ffe7;
     border-radius: 20px;
+    width: 300px;
 }
 
 #game-summary::backdrop {
