@@ -27,15 +27,16 @@ html, body {
     gap: 10px 0px;
 }
 
-#player-display-container i[icon="playerTwo"] {
-}
-
 .player-indicator {
     width: 150px;
     height: 5px;
     background-color: #c2ffe7;
     margin-top: 5px;
     border-radius: 10px;
+}
+
+.player-indicator[visible="false"] {
+    background-color: #00000000;
 }
 
 #game-grid {

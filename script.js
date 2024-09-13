@@ -163,8 +163,8 @@ const UiController = (function ()
     const game = GameController();
 
     const gameGrid = document.querySelector("#game-grid");
-    const playerOneDisplay = document.getElementById("player-one-display");
-    const playerTwoDisplay = document.getElementById("player-two-display");
+    const playerOneIndicator = document.getElementById("player-one-indicator");
+    const playerTwoIndicator = document.getElementById("player-two-indicator");
     const summary = document.getElementById("game-summary");
     const winnerDisplay = document.getElementById("winner-display");
     
@@ -174,6 +174,9 @@ const UiController = (function ()
         summary.close();
         updateGameBoard();
     })
+
+    playerOneIndicator.setAttribute("visible", "true");
+    playerTwoIndicator.setAttribute("visible", "false");
 
     const updateGameBoard = () => {
         gameGrid.replaceChildren();
@@ -215,6 +218,18 @@ const UiController = (function ()
     const processMove = (cell) => {
         game.playTurn(cell);
         game.switchActivePlayer();
+        if(game.getActivePlayer().getPlayerNumber() == 1)
+        {
+            playerOneIndicator.setAttribute("visible", "true");
+            playerTwoIndicator.setAttribute("visible", "false");
+            
+        }
+        else if(game.getActivePlayer().getPlayerNumber() == 2)
+        {
+            playerTwoIndicator.setAttribute("visible", "true");
+            playerOneIndicator.setAttribute("visible", "false");    
+        }
+            
         
         game.printBoard();
         updateGameBoard();
