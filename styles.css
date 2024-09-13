@@ -20,23 +20,18 @@ html, body {
 
 #player-display-container {
     padding-top: 10px;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    gap: 10px 0px;
 }
 
-.player-display {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-#player-two-display{
-    height: 130px;
+#player-display-container i[icon="playerTwo"] {
 }
 
 .player-indicator {
-    width: 100%;
+    width: 150px;
     height: 5px;
     background-color: #c2ffe7;
     margin-top: 5px;
@@ -72,11 +67,13 @@ html, body {
 i[icon="playerOne"] {
     font-size: 120px;
     color: #c2ffe7;
+    line-height: 120px;
 }
 
 i[icon="playerTwo"] {
     font-size: 100px;
     color: #c2ffe7;
+    line-height: 120px;
 }
 
 i[type="hover"] {
