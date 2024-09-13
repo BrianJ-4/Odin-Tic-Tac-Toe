@@ -166,6 +166,7 @@ const UiController = (function ()
     const playerOneDisplay = document.getElementById("player-one-display");
     const playerTwoDisplay = document.getElementById("player-two-display");
     const summary = document.getElementById("game-summary");
+    const winnerDisplay = document.getElementById("winner-display");
     
     const resetButton = document.getElementById("play-again-button");
     resetButton.addEventListener("click", (event) => {
@@ -193,7 +194,7 @@ const UiController = (function ()
                     gameCell.addEventListener('mouseover', () => {                        
                         if(!gameCell.hasChildNodes())
                         {
-                            const hoverIcon = getIcon(game.getActivePlayer().getPlayerNumber())
+                            const hoverIcon = getIcon(game.getActivePlayer().getPlayerNumber());
                             hoverIcon.setAttribute("type", "hover");
                             gameCell.appendChild(hoverIcon);
                         }                            
@@ -222,6 +223,7 @@ const UiController = (function ()
         if(result != 0)
         {   
             summary.showModal();
+            winnerDisplay.innerText = "Player " + result + " Wins!";
         }
     }
 
@@ -230,12 +232,12 @@ const UiController = (function ()
         if(cellValue == 1)
         {
             icon.className = "fa-solid fa-xmark";
-            icon.setAttribute("icon", "playerOne")                    
+            icon.setAttribute("icon", "playerOne");                
         }
         else if(cellValue == 2)
         {
             icon.className = "fa-regular fa-circle";
-            icon.setAttribute("icon", "playerTwo")                    
+            icon.setAttribute("icon", "playerTwo");                   
         }
         return icon;
     }
