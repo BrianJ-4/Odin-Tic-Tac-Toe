@@ -18,22 +18,9 @@ function Board()
         cell.pickCell(player);
     }
 
-    const printBoard = () => {
-        let boardString = "";
-        board.forEach(row => {
-            let rowString = ""
-            row.forEach(column => {
-                rowString += String(column.getCellValue());
-            });
-            boardString += rowString + "\n";
-        });
-        console.log(boardString);
-    }
-
     return {
         getBoard,
-        selectCell,
-        printBoard
+        selectCell
     };
 }
 
@@ -136,11 +123,6 @@ function GameController()
             return true;
         return false;
     }
-
-    const handleWin = (winner) => {
-        console.log(`Player ${winner} wins!`);
-        
-    }
     
     const resetGame = () => {
         const gameBoard = board.getBoard();
@@ -160,9 +142,7 @@ function GameController()
         switchActivePlayer,
         playTurn,
         getBoard: board.getBoard,
-        printBoard: board.printBoard,
         checkForWin,
-        handleWin,
         resetGame,
         checkForTie
     };
@@ -242,12 +222,9 @@ const UiController = (function ()
             playerOneIndicator.setAttribute("visible", "false");    
         }
             
-        
-        game.printBoard();
         updateGameBoard();
         
         const tie = game.checkForTie();
-        console.log(tie);
         
         if(tie)
         {
