@@ -128,6 +128,15 @@ function GameController()
         return 0;        
     }
 
+    const checkForTie = () => {
+        const gameBoard = board.getBoard();
+
+        const notEmpty = gameBoard.every(row => row.every(cell => cell.getCellValue() != 0));
+        if(checkForWin() == 0 && notEmpty)
+            return true;
+        return false;
+    }
+
     const handleWin = (winner) => {
         console.log(`Player ${winner} wins!`);
         
@@ -154,7 +163,8 @@ function GameController()
         printBoard: board.printBoard,
         checkForWin,
         handleWin,
-        resetGame
+        resetGame,
+        checkForTie
     };
 }
 
@@ -173,6 +183,8 @@ const UiController = (function ()
         game.resetGame();
         summary.close();
         updateGameBoard();
+        playerOneIndicator.setAttribute("visible", "true");
+        playerTwoIndicator.setAttribute("visible", "false");
     })
 
     playerOneIndicator.setAttribute("visible", "true");
@@ -233,6 +245,15 @@ const UiController = (function ()
         
         game.printBoard();
         updateGameBoard();
+        
+        const tie = game.checkForTie();
+        console.log(tie);
+        
+        if(tie)
+        {
+            summary.showModal();
+            winnerDisplay.innerText = "Tie!";
+        }
         
         const result = game.checkForWin();    
         if(result != 0)
