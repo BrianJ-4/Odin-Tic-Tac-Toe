@@ -189,6 +189,19 @@ const UiController = (function ()
                     gameCell.addEventListener('click', () => {
                         processMove(cell);
                     });
+
+                    gameCell.addEventListener('mouseover', () => {                        
+                        if(!gameCell.hasChildNodes())
+                        {
+                            const hoverIcon = getIcon(game.getActivePlayer().getPlayerNumber())
+                            hoverIcon.setAttribute("type", "hover");
+                            gameCell.appendChild(hoverIcon);
+                        }                            
+                    });
+
+                    gameCell.addEventListener('mouseout', () => {                        
+                        gameCell.removeChild(gameCell.firstChild);
+                    });
                 }                
 
                 if (cellValue != 0)

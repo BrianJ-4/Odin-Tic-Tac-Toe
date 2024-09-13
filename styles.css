@@ -49,6 +49,11 @@ html, body {
     align-items: center;
 }
 
+.cell i {
+    pointer-events: none;
+}
+
+
 i[icon="playerOne"] {
     font-size: 120px;
     color: #c2ffe7;
@@ -57,4 +62,8 @@ i[icon="playerOne"] {
 i[icon="playerTwo"] {
     font-size: 100px;
     color: #c2ffe7;
+}
+
+i[type="hover"] {
+    opacity: 0.50;
 }
