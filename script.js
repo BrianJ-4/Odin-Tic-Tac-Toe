@@ -103,8 +103,10 @@ function GameController()
         
         for (let i = 0; i < 3; i++)
         {
-            if (checkRow(i)) return gameBoard[i][0].getCellValue();
-            if (checkColumn(i)) return gameBoard[0][i].getCellValue();
+            if (checkRow(i))
+                return gameBoard[i][0].getCellValue();
+            if (checkColumn(i))
+                return gameBoard[0][i].getCellValue();
         }
         
         if (checkLeftToRightDiagonal())
