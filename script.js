@@ -1,3 +1,4 @@
+// Board object holds Cell objects in a 2D array
 function Board()
 {
     const board = [];
@@ -24,6 +25,8 @@ function Board()
     };
 }
 
+// Cell object represents a cell on a Tic Tac Toe grid and holds the value
+// of the player that selected it
 function Cell()
 {
     let value = 0;
@@ -42,6 +45,8 @@ function Cell()
     };
 }
 
+// Player object represents a player and has a number that is used to mark
+// cells
 function Player(number)
 {
     const playerNumber = number;
@@ -53,6 +58,7 @@ function Player(number)
     return {getPlayerNumber};
 }
 
+//GameController object controls the flow of the game
 function GameController()
 {
     const board = Board();
@@ -150,6 +156,8 @@ function GameController()
     };
 }
 
+// UiController object handles the game displayed to the user as well as
+// user inputs
 const UiController = (function ()
 {
     const game = GameController();
